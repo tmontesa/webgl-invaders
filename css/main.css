@@ -1,0 +1,36 @@
+* {
+    font-family: 'Barlow Semi Condensed', sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+    background: rgb(247, 161, 3);
+    padding: 10px 15px;
+    display: inline-block;
+    width: 150px;
+    margin-bottom: 10px;
+    border-radius: 2px;
+    transition: background 0.3s;
+}
+
+a:hover {
+    background: rgb(247, 101, 3);
+    transition: background 0.1s;
+}
+
+body {
+    display: flex;
+}
+
+main {
+    display: inline-block;
+    margin: auto;
+    text-align: center;
+}
+
+canvas {
+    border: 1px dashed #aaa;
+    margin-bottom: 30px;
+    border-radius: 5px;
+}
