@@ -12,6 +12,23 @@ function game_render_player() {
     vertex_offset += box_vertices_length;
 }
 
+function game_render_enemies() {
+    for (var i = 0; i < enemies.length; i++) {
+        for (var e = 0; e < enemies[i].length; e++) {
+
+            vertices = vertices.concat(
+                get_box_vertices(enemies[i][e].position, enemies[i][e].dimension, enemies[i][e].color)
+            );
+
+            indices = indices.concat(
+                get_box_indices(vertex_offset)
+            );
+
+            vertex_offset += box_vertices_length;
+        }
+    }
+}
+
 //
 // Main Render Function
 //
@@ -22,6 +39,7 @@ function game_render() {
     indices = [];
 
     game_render_player();
+    game_render_enemies();
 
     gl.bindBuffer(gl.ARRAY_BUFFER, VBO);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);

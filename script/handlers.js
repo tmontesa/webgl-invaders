@@ -6,9 +6,6 @@ var key = {
     SPACE:  false
 };
 
-document.addEventListener("keydown", handlerKeyDown, false);
-document.addEventListener("keyup", handlerKeyUp, false);
-
 function handlerKeyDown(e) {
 	switch(e.keyCode) {
 		case 37:

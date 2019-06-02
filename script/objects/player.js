@@ -11,6 +11,6 @@ function Player(w, h, x, y) {
     this.s = 0.025;
 
     // Color of the object.
-    this.color = new Color(1, 0, 0);
+    this.color = new Color(1, 0.6, 0.2);
 
 }
