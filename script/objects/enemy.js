@@ -15,6 +15,10 @@ function Enemy(w, h, x, y) {
 
     // A cooldown (in frames), for each movement.
     this.movement_cooldown = random_int(10, 200);
+
+    // Enemy health. Must be shot this many times to disappear.
+    this.health = 3;
+    this.base_health = 3;
 }
 
 function generate_enemies(w, h, rows, cols, pady) {

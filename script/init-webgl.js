@@ -20,7 +20,8 @@ function initialize() {
     
     // Set viewport & clear color.
     gl.viewport(0, 0, canvas.width, canvas.height);
-    gl.clearColor(1.0, 1.0, 0.8, 1.0);
+    //gl.clearColor(1.0, 1.0, 0.8, 1.0);
+    gl.clearColor(0.1, 0.1, 0.1, 1.0);
 
     // Load shaders.
     var program = initialize_shaders(gl, "shaders/vshader.glsl", "shaders/fshader.glsl");

@@ -29,6 +29,34 @@ function game_render_enemies() {
     }
 }
 
+function game_render_player_bullets() {
+    for (var i = 0; i < player_bullets.length; i++) {
+        vertices = vertices.concat(
+            get_box_vertices(player_bullets[i].position, player_bullets[i].dimension, player_bullets[i].color)
+        );
+    
+        indices = indices.concat(
+            get_box_indices(vertex_offset)
+        );
+    
+        vertex_offset += box_vertices_length;
+    }
+}
+
+function game_render_enemy_bullets() {
+    for (var i = 0; i < enemy_bullets.length; i++) {
+        vertices = vertices.concat(
+            get_box_vertices(enemy_bullets[i].position, enemy_bullets[i].dimension, enemy_bullets[i].color)
+        );
+    
+        indices = indices.concat(
+            get_box_indices(vertex_offset)
+        );
+    
+        vertex_offset += box_vertices_length;
+    }
+}
+
 //
 // Main Render Function
 //
@@ -40,6 +68,8 @@ function game_render() {
 
     game_render_player();
     game_render_enemies();
+    game_render_player_bullets();
+    game_render_enemy_bullets();
 
     gl.bindBuffer(gl.ARRAY_BUFFER, VBO);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);

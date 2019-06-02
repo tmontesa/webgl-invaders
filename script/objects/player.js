@@ -13,4 +13,9 @@ function Player(w, h, x, y) {
     // Color of the object.
     this.color = new Color(1, 0.6, 0.2);
 
+    // Bullet spawn cooldown (in frames).
+    // Player may only shoot every n frames.
+    this.bullet_cooldown = 0;
+    this.base_bullet_cooldown = 20;
+
 }

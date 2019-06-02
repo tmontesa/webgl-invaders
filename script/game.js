@@ -14,8 +14,11 @@ const bounds_h = 2;
 var player = new Player(0.1, 0.1, 0, 0);
 
 // Create multiple instances of enemies.
-var enemies = generate_enemies(0.1, 0.1, 2, 8, 0.2);
+var enemies = generate_enemies(0.1, 0.1, 4, 8, 0.15);
 
+// Create an array for player and enemy bullets.
+var player_bullets = [];
+var enemy_bullets = [];
 
 //
 // Game Loop
