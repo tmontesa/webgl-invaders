@@ -15,6 +15,6 @@ function contain_number(n, min, max) {
 function collision(ax, ay, aw, ah, bx, by, bw, bh) {
     return ax < bx + bw &&
             ax + aw > bx &&
-            ay < by + bh &&
-            ah + ay > by;
+            ay > by - bh &&
+            -ah + ay < by;
 }

@@ -18,4 +18,6 @@ function Player(w, h, x, y) {
     this.bullet_cooldown = 0;
     this.base_bullet_cooldown = 20;
 
+    // Invincibility for debug.
+    this.invincible = false;
 }

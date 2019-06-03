@@ -1,3 +1,15 @@
+function game_update_particle() {
+    for (var i = 0; i < particles.length; i++) {
+        particles[i].position.y -= particles[i].s;
+
+        // If out of bounds (below camera), despawn and spawn 
+        // another random particle. Keeps # of particles consistent.
+        if (particles[i].position.y < bounds_y) {
+            particles[i] = generate_particle();
+        }
+    }
+}
+
 function game_update_player_movement() {
     player.vx /= 1.60;
     player.vy /= 1.60;
@@ -20,7 +32,7 @@ function game_update_player_bullet_spawn() {
     }
 
     // Proceed only if player has pressed the shoot button.
-    if (!key.SPACE) { return; }
+    if (!key.MOUSE_1) { return; }
 
     // Append a new Bullet to player_bullets.
     player_bullets.push(new Bullet(
@@ -29,6 +41,7 @@ function game_update_player_bullet_spawn() {
         player.position.y,
         1, 0.8, 0
     ));
+    AUDIO.PLAYER_SHOOT.cloneNode().play();
 
     // Reinstate cooldown.
     player.bullet_cooldown = player.base_bullet_cooldown;
@@ -71,18 +84,35 @@ function game_update_enemy_movement() {
             }
 
             // Before moving the enemy, check if moving enemy will keep it in bounds.
-            // In other words, if it collides with an object spanning the entire area.
             // If it will go out of bounds, reverse the velocity.
-            if (!collision(
-                bounds_x, bounds_y, 
-                bounds_w, bounds_h,
-                enemies[i][e].position.x + enemies[i][e].vx, enemies[i][e].position.y, 
-                enemies[i][e].dimension.w, enemies[i][e].dimension.h)) {
-                    enemies[i][e].vx *= -1;
+            if (enemies[i][e].position.x + enemies[i][e].vx < bounds_x ||
+                enemies[i][e].position.x + enemies[i][e].vx + enemies[i][e].dimension.w > bounds_x2) {
+                    enemies[i][e].vx = 0;
+            }
+
+            // Also check if it will collide with its neighbor to the left.
+            if (e-1 > 0 && collision(
+                enemies[i][e].position.x + enemies[i][e].vx, enemies[i][e].position.x, enemies[i][e].dimension.w, enemies[i][e].dimension.h,
+                enemies[i][e-1].position.x + enemies[i][e-1].vx, enemies[i][e-1].position.x, enemies[i][e-1].dimension.w, enemies[i][e-1].dimension.h)) {
+                enemies[i][e].vx = 0;
+            }
+
+            // Also check if it will collide with its neighbor to the right.
+            if (e+1 < enemies[i].length && collision(
+                enemies[i][e].position.x + enemies[i][e].vx, enemies[i][e].position.x, enemies[i][e].dimension.w, enemies[i][e].dimension.h,
+                enemies[i][e+1].position.x + enemies[i][e+1].vx, enemies[i][e+1].position.x, enemies[i][e+1].dimension.w, enemies[i][e+1].dimension.h)) {
+                enemies[i][e].vx = 0;
             }
 
             enemies[i][e].position.x += enemies[i][e].vx;
             enemies[i][e].position.y += -0.0005; 
+
+            // Check if enemy is in the bottom on the area.
+            // Player loses if so!
+            if (enemies[i][e].position.y - enemies[i][e].dimension.h < bounds_y) {
+                game_lose();
+                return;
+            }
 
             enemies[i][e].vx /= 1.20;
         }
@@ -115,8 +145,10 @@ function game_update_player_bullet_collision() {
                     enemies[i][e].health--;
                     if (enemies[i][e].health <= 0) {
                         enemies[i].splice(e, 1);
+                        AUDIO.ENEMY_DIE.cloneNode().play();
                     } else {
                         enemies[i][e].color.r = enemies[i][e].health / enemies[i][e].base_health;  
+                        AUDIO.ENEMY_HIT.cloneNode().play();
                     }
 
                 }
@@ -126,11 +158,21 @@ function game_update_player_bullet_collision() {
 }
 
 function game_update_enemy_bullet_spawn() {
+
+    // If player is invincible (debug), don't bother checking.
+    if (player.invincible) { return; }
+
     // Decide which row does the shooting.
     // Only the bottommost row can shoot.
-    var row_shooting = -1;
+
+    var row_shooting;
     for (var r = 0; r < enemies.length; r++) {
         if (enemies[r].length > 0) { row_shooting = r; }
+    }
+    if (row_shooting == null) {
+        // All enemies should be wiped out now.
+        game_win();
+        return;
     }
 
     // Each enemy in that row has a chance to spawn a bullet.
@@ -144,6 +186,7 @@ function game_update_enemy_bullet_spawn() {
                 enemies[row_shooting][e].position.y - enemies[row_shooting][e].dimension.h,
                 0.6, 0, 0.2
             ));
+            AUDIO.ENEMY_SHOOT.cloneNode().play();
         }
     }
 }
@@ -171,7 +214,8 @@ function game_update_enemy_bullet_collision() {
             player.position.x, player.position.y,
             player.dimension.w, player.dimension.h
         )) {
-            console.log("You lose!");
+            game_lose();
+            return;
         }
     }  
 } 
@@ -181,6 +225,7 @@ function game_update_enemy_bullet_collision() {
 //
 
 function game_update() {
+    game_update_particle();
     game_update_player_movement();
     game_update_player_bullet_spawn();
     game_update_player_bullet_movement();

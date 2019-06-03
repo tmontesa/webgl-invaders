@@ -1,43 +1,16 @@
-// 1 2
-// 0 3
+const AUDIO = {
+    // https://freesound.org/people/nsstudios/sounds/344276/
+    "PLAYER_SHOOT":     new Audio("assets/audio/player_shoot.wav"),
 
-var player = {
-    vertices: [
-        // x, y, R, G, B
-        0, 0, 0, 0, 1,
-        0, .5, 0, 0, 1,
-        .5,.5, 0, 0, 1,
-        .5, 0, 0, 0, 1
-    ],
+    // https://freesound.org/people/destro_94/sounds/84521/
+    "PLAYER_DIE":       new Audio("assets/audio/player_die.wav"),
 
-    indices: [
-        // a, b, c
-        0, 1, 2,
-        0, 2, 3
-    ],
+    // https://freesound.org/people/Aeross/sounds/390520
+    "ENEMY_SHOOT":      new Audio("assets/audio/enemy_shoot.mp3"),
 
-    x: 0.0, 
-    y: 0.0,
-    vx: 0.0,
-    vy: 0.0,
-    s: 0.04
-}
+    // https://freesound.org/people/humanoide9000/sounds/422440/
+    "ENEMY_HIT":        new Audio("assets/audio/enemy_hit.wav"),
 
-var enemy= {
-    vertices: [
-        // x, y, R, G, B
-        1, 1, 1, 0, 0,
-        1, .75, 1, 0, 0,
-        .75,.75, 1, 0, 0,
-        .75, 1, 1, 0, 0
-    ],
-
-    indices: [
-        // a, b, c
-        0+4, 1+4, 2+4,
-        0+4, 2+4, 3+4
-    ],
-
-    x: 0.0, 
-    y: 0.0
-}
+    // https://freesound.org/people/jalastram/sounds/317747/
+    "ENEMY_DIE":        new Audio("assets/audio/enemy_die.wav")
+};

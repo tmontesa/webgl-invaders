@@ -1,5 +1,19 @@
 var vertex_offset = 0;
 
+function game_render_particles() {
+    for (var i = 0; i < particles.length; i++) {
+        vertices = vertices.concat(
+            get_box_vertices(particles[i].position, particles[i].dimension, particles[i].color)
+        );
+
+        indices = indices.concat(
+            get_box_indices(vertex_offset)
+        );
+
+        vertex_offset += box_vertices_length;
+    }
+}
+
 function game_render_player() {
     vertices = vertices.concat(
         get_box_vertices(player.position, player.dimension, player.color)
@@ -66,6 +80,7 @@ function game_render() {
     vertices = [];
     indices = [];
 
+    game_render_particles();
     game_render_player();
     game_render_enemies();
     game_render_player_bullets();
