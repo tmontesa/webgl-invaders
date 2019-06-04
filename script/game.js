@@ -17,17 +17,17 @@ const bounds_h = 2;
 var gameplay_time = 0;
 
 // Create instance of player.
-var player = new Player(0.1, 0.1, 0, 0);
+var player = new Player(CONFIG.PLAYER_SIZE_W, CONFIG.PLAYER_SIZE_H, 0, bounds_y + CONFIG.PLAYER_SIZE_H);
 
 // Create multiple instances of enemies.
-var enemies = generate_enemies(0.1, 0.1, 2, 4, 0.15);
+var enemies = generate_enemies(CONFIG.ENEMY_SIZE_W, CONFIG.ENEMY_SIZE_H, CONFIG.ENEMY_NUM_ROWS, CONFIG.ENEMY_NUM_COLS, CONFIG.ENEMY_SIZE_H + CONFIG.ENEMY_VERTICAL_PADDING);
 
 // Create an array for player and enemy bullets.
 var player_bullets = [];
 var enemy_bullets = [];
 
 // Create multiple instances of particles.
-var particles = generate_particles(32);
+var particles = generate_particles(CONFIG.PARTICLE_AMOUNT);
 
 //
 // Quit, Restart, Lose, Win
@@ -39,8 +39,8 @@ function game_quit() {
 }
 
 function game_restart() {
-    player = new Player(0.1, 0.1, 0, 0);
-    enemies = generate_enemies(0.1, 0.1, 4, 8, 0.15);
+    player = new Player(CONFIG.PLAYER_SIZE_W, CONFIG.PLAYER_SIZE_H, 0, bounds_y + CONFIG.PLAYER_SIZE_H);
+    enemies = generate_enemies(CONFIG.ENEMY_SIZE_W, CONFIG.ENEMY_SIZE_H, CONFIG.ENEMY_NUM_ROWS, CONFIG.ENEMY_NUM_COLS, CONFIG.ENEMY_SIZE_H + CONFIG.ENEMY_VERTICAL_PADDING);
     player_bullets = [];
     enemy_bullets = [];
     gameplay_time = 0;

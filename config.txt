@@ -1,0 +1,99 @@
+// This is a config file for the game.
+// This is still read as a javascript file, and will not work if syntax is not correct.
+
+const CONFIG = {
+
+// This allows up/down movement using UP/DOWN or W/S.
+// Default: false
+PLAYER_ALLOW_VERTICAL_MOVEMENT: false,
+
+// This controls the player size.
+// Default: 0.1, 0.1
+PLAYER_SIZE_W: 0.1,
+PLAYER_SIZE_H: 0.1,
+
+// This controls the speed of the player when it moves.
+// Default: 0.025
+PLAYER_SPEED: 0.025,
+
+// This gives the player invincibility, making you immune to bullets.
+// Default: false
+PLAYER_INVINCIBLE: false,
+
+// This controls the color of the player block.
+// Default: 1.0, 0.6, 0.2
+PLAYER_COLOR_R: 1.0,
+PLAYER_COLOR_G: 0.6,
+PLAYER_COLOR_B: 0.2,
+
+// This controls the player bullet spawn cooldown (a.k.a. shooting speed), in frames.
+// Default: 20
+PLAYER_BULLET_COOLDOWN: 20,
+
+// This controls the size of the player's bullet.
+// Default: 0.025, 0.025
+PLAYER_BULLET_SIZE_W: 0.025,
+PLAYER_BULLET_SIZE_H: 0.025,
+
+// This controls the color of the player bullet.
+// Default: 1.0, 0.8, 0.0
+PLAYER_BULLET_COLOR_R: 1.0,
+PLAYER_BULLET_COLOR_G: 0.8,
+PLAYER_BULLET_COLOR_B: 0.0,
+
+// This controls the number of enemies that will be generated.
+// Default: 2, 9
+ENEMY_NUM_ROWS: 2,
+ENEMY_NUM_COLS: 9,
+
+// This controls the enemy size (width, height).
+// Default: 0.1, 0.1
+ENEMY_SIZE_W: 0.1,
+ENEMY_SIZE_H: 0.1,
+
+// This controls the vertical distance between the enemies.
+// Default: 0.05
+ENEMY_VERTICAL_PADDING: 0.05,
+
+// This controls the speeds (min, max) at which an enemy can move.
+// Default: 0.005, 0.01
+ENEMY_SPEED_MIN: 0.005,
+ENEMY_SPEED_MAX: 0.01,
+
+// This controls the times (in frames) in between horizontal enemy movements.
+// Default: 10, 100
+ENEMY_MOVEMENT_COOLDOWN_MIN: 10,
+ENEMY_MOVEMENT_COOLDOWN_MAX: 200,
+
+// This controls the speed at which it uniformly moves downward.
+// Default: 0.00075
+ENEMY_VERTICAL_SPEED: 0.00075,
+
+// This controls the health (or how many times it needs to be shot to die) of each enemy.
+// Default: 3
+ENEMY_HEALTH: 3,
+
+// This controls the chance which each shooting enemy shoots every frame.
+// Default: 0.0075
+ENEMY_BULLET_CHANCE: 0.0075,
+
+// This controls the size of the enemy's bullet.
+// Default: 0.025, 0.025
+ENEMY_BULLET_SIZE_W: 0.025,
+ENEMY_BULLET_SIZE_H: 0.025,
+
+// This controls the color of the enemy bullet.
+// Default: 0.6, 0.0, 0.2
+ENEMY_BULLET_COLOR_R: 0.6,
+ENEMY_BULLET_COLOR_G: 0.0,
+ENEMY_BULLET_COLOR_B: 0.2,
+
+// This controls the bullet speed.
+// Default: 0.005;
+BULLET_SPEED: 0.005,
+
+// This controls the amount of background "star" particles. Completely cosmetic.
+// Default: 32
+PARTICLE_AMOUNT: 32
+
+}

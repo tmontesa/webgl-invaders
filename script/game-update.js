@@ -20,7 +20,9 @@ function game_update_player_movement() {
     if (key.UP)     { player.vy =  player.s }
     
     player.position.x += player.vx;
-    player.position.y += player.vy;
+    if (CONFIG.PLAYER_ALLOW_VERTICAL_MOVEMENT) {
+        player.position.y += player.vy;
+    }
 }
 
 function game_update_player_bullet_spawn() {
@@ -36,10 +38,10 @@ function game_update_player_bullet_spawn() {
 
     // Append a new Bullet to player_bullets.
     player_bullets.push(new Bullet(
-        0.025 , 0.025,
-        player.position.x + (player.dimension.w/2) - (0.025/2),
+        CONFIG.PLAYER_BULLET_SIZE_W , CONFIG.PLAYER_BULLET_SIZE_H,
+        player.position.x + (player.dimension.w/2) - (CONFIG.PLAYER_BULLET_SIZE_W/2),
         player.position.y,
-        1, 0.8, 0
+        CONFIG.PLAYER_BULLET_COLOR_R, CONFIG.PLAYER_BULLET_COLOR_G, CONFIG.PLAYER_BULLET_COLOR_B
     ));
     AUDIO.PLAYER_SHOOT.cloneNode().play();
 
@@ -73,14 +75,14 @@ function game_update_enemy_movement() {
 
                 // Choose a random velocity for the enemy.
                 // The farther down, the faster they move.
-                enemies[i][e].s = random_float(0.005, 0.01 + ((2 - (enemies[i][e].position.y + 1))) / 30);
+                enemies[i][e].s = random_float(CONFIG.ENEMY_SPEED_MIN, CONFIG.ENEMY_SPEED_MAX + ((2 - (enemies[i][e].position.y + 1))) / 30);
 
                 // Set the velocity of the enemy.
                 enemies[i][e].vx =  enemies[i][e].s * x_movement_direction;
 
                 // Reinstate a (random) cooldown.
                 // The farther down, the more often they move.
-                enemies[i][e].movement_cooldown = random_int(10, 250 - ((2 - (enemies[i][e].position.y + 1)) * 140));
+                enemies[i][e].movement_cooldown = random_int(CONFIG.ENEMY_MOVEMENT_COOLDOWN_MIN, CONFIG.ENEMY_MOVEMENT_COOLDOWN_MAX - ((2 - (enemies[i][e].position.y + 1)) * 140));
             }
 
             // Before moving the enemy, check if moving enemy will keep it in bounds.
@@ -105,7 +107,7 @@ function game_update_enemy_movement() {
             }
 
             enemies[i][e].position.x += enemies[i][e].vx;
-            enemies[i][e].position.y += -0.0005; 
+            enemies[i][e].position.y += -CONFIG.ENEMY_VERTICAL_SPEED; 
 
             // Check if enemy is in the bottom on the area.
             // Player loses if so!
@@ -179,12 +181,12 @@ function game_update_enemy_bullet_spawn() {
     // Append that new Bullet to enemy_bullets.
 
     for (var e = 0; e < enemies[row_shooting].length; e++) {
-        if (Math.random() <= 0.0075) {
+        if (Math.random() <= CONFIG.ENEMY_BULLET_CHANCE) {
             enemy_bullets.push(new Bullet(
-                0.025 , 0.025,
-                enemies[row_shooting][e].position.x + (enemies[row_shooting][e].dimension.w/2) - (0.025/2),
+                CONFIG.ENEMY_BULLET_SIZE_W , CONFIG.ENEMY_BULLET_SIZE_H,
+                enemies[row_shooting][e].position.x + (enemies[row_shooting][e].dimension.w/2) - (CONFIG.ENEMY_BULLET_SIZE_W/2),
                 enemies[row_shooting][e].position.y - enemies[row_shooting][e].dimension.h,
-                0.6, 0, 0.2
+                CONFIG.ENEMY_BULLET_COLOR_R, CONFIG.ENEMY_BULLET_COLOR_G, CONFIG.ENEMY_BULLET_COLOR_B
             ));
             AUDIO.ENEMY_SHOOT.cloneNode().play();
         }

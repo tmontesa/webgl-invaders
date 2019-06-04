@@ -8,17 +8,18 @@ function Enemy(w, h, x, y) {
     // Velocity of the object, and its speed when moving.
     this.vx = 0;
     this.vy = 0;
-    this.s = random_float(0.005, 0.01);
+    this.s = random_float(CONFIG.ENEMY_SPEED_MIN, CONFIG.ENEMY_SPEED_MAX);
 
     // Color of the object.
     this.color = new Color(1, 0, 0);
 
     // A cooldown (in frames), for each movement.
-    this.movement_cooldown = random_int(10, 200);
+    this.movement_cooldown = random_int(CONFIG.ENEMY_MOVEMENT_COOLDOWN_MIN, CONFIG.ENEMY_MOVEMENT_COOLDOWN_MAX);
 
     // Enemy health. Must be shot this many times to disappear.
-    this.health = 3;
-    this.base_health = 3;
+    this.base_health = CONFIG.ENEMY_HEALTH;
+    this.health = this.base_health;
+    
 }
 
 function generate_enemies(w, h, rows, cols, pady) {

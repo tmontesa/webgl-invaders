@@ -6,7 +6,7 @@ function Bullet(w, h, x, y, r, g, b) {
     this.position = new Position(x, y);
 
     // Speed of the bullet.
-    this.s = 0.005;
+    this.s = CONFIG.BULLET_SPEED;
 
     // Color of the object.
     this.color = new Color(r, g, b);
