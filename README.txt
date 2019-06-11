@@ -15,4 +15,8 @@ Some information were taken from these sources:
 - http://www.kamaron.me/webgl-tutorial/01-setup-and-triangle
 - https://stackoverflow.com/questions/57854/how-can-i-close-a-browser-window-without-receiving-the-do-you-want-to-close-thi
 
+You must use a server to run the game (cannot just open HTML file). Or, you may use this Github link to demo it:
+https://tmontesa.github.io/webgl-invaders/
+Note: Quitting the game does not work due to browser security reasons. It will work if ran locally, however.
+
 Thanks and have fun! :-)
