@@ -1,4 +1,11 @@
-// Taken from class files, initShader2.js
+//
+// init-shaders.js
+// =========
+// Functions needed to initialize shaders and import external files.
+//
+
+// Credit:
+// Taken from class files, initShader2.js.
 
 function loadFileAJAX(filename) {
     var xhr = new XMLHttpRequest();

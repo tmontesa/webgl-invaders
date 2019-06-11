@@ -1,3 +1,10 @@
+//
+// render/box.js
+// =========
+// Creates an array of vertices for a box given a position, dimension, and color.
+// These vertices will be appended to a "master" array.
+//
+
 // Each rendered object will contain a position,
 // dimension, and color object. These will then
 // be converted into a vertex for the VBO.

@@ -1,3 +1,9 @@
+//
+// game-render.js
+// =========
+// Includes the necessary WebGL functions to render game-specific objects.
+//
+
 var vertex_offset = 0;
 
 function game_render_particles() {

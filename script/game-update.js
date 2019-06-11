@@ -1,3 +1,9 @@
+//
+// game-update.js
+// =========
+// Includes the necessary functions in order to calculate game-specific events.
+//
+
 function game_update_particle() {
     for (var i = 0; i < particles.length; i++) {
         particles[i].position.y -= particles[i].s;
@@ -34,7 +40,7 @@ function game_update_player_bullet_spawn() {
     }
 
     // Proceed only if player has pressed the shoot button.
-    if (!key.MOUSE_1) { return; }
+    if (!key.MOUSE_1 && !key.SPACE) { return; }
 
     // Append a new Bullet to player_bullets.
     player_bullets.push(new Bullet(
@@ -92,19 +98,18 @@ function game_update_enemy_movement() {
                     enemies[i][e].vx = 0;
             }
 
-            // Also check if it will collide with its neighbor to the left.
-            if (e-1 > 0 && collision(
-                enemies[i][e].position.x + enemies[i][e].vx, enemies[i][e].position.x, enemies[i][e].dimension.w, enemies[i][e].dimension.h,
-                enemies[i][e-1].position.x + enemies[i][e-1].vx, enemies[i][e-1].position.x, enemies[i][e-1].dimension.w, enemies[i][e-1].dimension.h)) {
-                enemies[i][e].vx = 0;
-            }
+            // Also check if it will collide with its neighbors.
+            for (var other_enemy = 0; other_enemy < enemies[i].length; other_enemy++) {
+            
+                if (e == other_enemy) { continue; }
+                if (collision(
+                    enemies[i][e].position.x + enemies[i][e].vx, enemies[i][e].position.y, enemies[i][e].dimension.w, enemies[i][e].dimension.h,
+                    enemies[i][other_enemy].position.x, enemies[i][other_enemy].position.y, enemies[i][other_enemy].dimension.w, enemies[i][other_enemy].dimension.h)) {
+                    enemies[i][e].vx = 0;
+                }
 
-            // Also check if it will collide with its neighbor to the right.
-            if (e+1 < enemies[i].length && collision(
-                enemies[i][e].position.x + enemies[i][e].vx, enemies[i][e].position.x, enemies[i][e].dimension.w, enemies[i][e].dimension.h,
-                enemies[i][e+1].position.x + enemies[i][e+1].vx, enemies[i][e+1].position.x, enemies[i][e+1].dimension.w, enemies[i][e+1].dimension.h)) {
-                enemies[i][e].vx = 0;
             }
+          
 
             enemies[i][e].position.x += enemies[i][e].vx;
             enemies[i][e].position.y += -CONFIG.ENEMY_VERTICAL_SPEED; 
@@ -161,9 +166,6 @@ function game_update_player_bullet_collision() {
 
 function game_update_enemy_bullet_spawn() {
 
-    // If player is invincible (debug), don't bother checking.
-    if (player.invincible) { return; }
-
     // Decide which row does the shooting.
     // Only the bottommost row can shoot.
 
@@ -201,6 +203,9 @@ function game_update_enemy_bullet_movement() {
 }
 
 function game_update_enemy_bullet_collision() {
+    // If player is invincible (debug), don't bother checking.
+    if (player.invincible) { return; }
+    
     for (var b = 0; b < enemy_bullets.length; b++) { 
         // Remove bullets offscreen (above the camera).
         if (enemy_bullets[b].position.y < bounds_y) {

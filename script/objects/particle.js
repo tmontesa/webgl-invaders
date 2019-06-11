@@ -1,3 +1,11 @@
+//
+// object/particle.js
+// =========
+// Cosmetic particles that spawn behind the other game objects.
+// Supposed to represent "stars" to imitate space.
+//
+
+
 function Particle(w, h, x, y) {
     //  Dimensions of the bullet object.
     this.dimension = new Dimension(w, h);

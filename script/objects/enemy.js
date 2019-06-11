@@ -1,3 +1,9 @@
+//
+// object/enemy.js
+// =========
+// Enemies that appear on top of the screen that players shoot at.
+//
+
 function Enemy(w, h, x, y) {
     //  Dimensions of the Enemy object.
     this.dimension = new Dimension(w, h);

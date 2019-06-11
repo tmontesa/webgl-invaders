@@ -1,3 +1,10 @@
+//
+// math.js
+// =========
+// Miscellaneous math functions.
+// (Reused from my old project.)
+//
+
 function random_float(min, max) {
     return min + (Math.random() * (max - min));
 }

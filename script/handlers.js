@@ -1,3 +1,10 @@
+//
+// handlers.js
+// =========
+// Contains handler functions to track input events.
+// (Reused from my old project.)
+//
+
 var canvas_offset_x = 0;
 var canvas_offset_y = 0;
 

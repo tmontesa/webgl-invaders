@@ -1,3 +1,9 @@
+//
+// init-webgl.js
+// =========
+// Function to initialize WebGL, as well as the main game loop.
+//
+
 var canvas, gl;
 
 // Vertices and indices of ALL objects that will be drawn on screen.
@@ -27,7 +33,7 @@ function initialize() {
     var program = initialize_shaders(gl, "shaders/vshader.glsl", "shaders/fshader.glsl");
     gl.useProgram(program);
 
-    // Create a buffer to bind player vertices & indices to, and buffer.
+    // Create a vertex & index buffer object to bind vertices & indices to, and buffer.
     VBO = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, VBO);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices), gl.STATIC_DRAW);
@@ -39,23 +45,23 @@ function initialize() {
     // Get position attribute location, and bind the buffer to that attribute.
     var positionAttribLocation = gl.getAttribLocation(program, "vPosition");
     gl.vertexAttribPointer(
-        positionAttribLocation,      // Attribute location
-        2,                          // Number of elements per attribute
-        gl.FLOAT,                   // Data type of element
+        positionAttribLocation,             // Attribute location
+        2,                                  // Number of elements per attribute
+        gl.FLOAT,                           // Data type of element
         gl.FLASE,
-        5 * Float32Array.BYTES_PER_ELEMENT,     // Size of each vertex
-        0                                       // Offset of the specific attribute
+        5 * Float32Array.BYTES_PER_ELEMENT, // Size of each vertex
+        0                                   // Offset of the specific attribute
     );
 
     // Get color attribute location, and bind the buffer to that attribute.
     var colorAttribLocation = gl.getAttribLocation(program, "vColor");
     gl.vertexAttribPointer(
-        colorAttribLocation,             // Attribute location
-        3,                              // Number of elements per attribute
-        gl.FLOAT,                       // Data type of element
+        colorAttribLocation,                // Attribute location
+        3,                                  // Number of elements per attribute
+        gl.FLOAT,                           // Data type of element
         gl.FLASE,
-        5 * Float32Array.BYTES_PER_ELEMENT,     // Size of each vertex
-        2 * Float32Array.BYTES_PER_ELEMENT      // Offset of the specific attribute
+        5 * Float32Array.BYTES_PER_ELEMENT, // Size of each vertex
+        2 * Float32Array.BYTES_PER_ELEMENT  // Offset of the specific attribute
     );
 
     // Enable attributes.
@@ -67,5 +73,3 @@ function initialize() {
     gl.clear(gl.COLOR_BUFFER_BIT);
     setInterval(game_loop, 20);
 }
-
-// gl.drawElements(gl.TRIANGLES, player.indices.length, gl.UNSIGNED_SHORT, 0);

@@ -1,5 +1,13 @@
-// This is a config file for the game.
-// This is still read as a javascript file, and will not work if syntax is not correct.
+//
+// config.txt
+// =========
+// This is a config file for the game. You may change any of these options through this file
+// or by using the browser console under CONFIG. To see most changes, you must restart the game
+// by pressing R.
+//
+// NOTE:
+// This is still read as a Javascript file, and will not work if syntax is not correct.
+//
 
 const CONFIG = {
 
@@ -21,9 +29,9 @@ PLAYER_SPEED: 0.025,
 PLAYER_INVINCIBLE: false,
 
 // This controls the color of the player block.
-// Default: 1.0, 0.6, 0.2
-PLAYER_COLOR_R: 1.0,
-PLAYER_COLOR_G: 0.6,
+// Default:  0.9, 1.0, 0.2
+PLAYER_COLOR_R: 0.9, 
+PLAYER_COLOR_G: 1.0,
 PLAYER_COLOR_B: 0.2,
 
 // This controls the player bullet spawn cooldown (a.k.a. shooting speed), in frames.
@@ -75,7 +83,7 @@ ENEMY_HEALTH: 3,
 
 // This controls the chance which each shooting enemy shoots every frame.
 // Default: 0.0075
-ENEMY_BULLET_CHANCE: 0.0075,
+ENEMY_BULLET_CHANCE: 0.0050,
 
 // This controls the size of the enemy's bullet.
 // Default: 0.025, 0.025

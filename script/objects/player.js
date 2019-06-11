@@ -1,3 +1,10 @@
+//
+// object/enemies.js
+// =========
+// The player object that the player can move and spawn projectiles from.
+//
+
+
 function Player(w, h, x, y) {
     //  Dimensions of the player object.
     this.dimension = new Dimension(w, h);
